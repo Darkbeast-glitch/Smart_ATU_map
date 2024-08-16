@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1081959708316",
+    "project_id": "smart-atu",
+    "storage_bucket": "smart-atu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081959708316:android:2c8edca84df9dc79531f59",
+        "android_client_info": {
+          "package_name": "com.smart_atu_nav.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3gyp-a17FfMeK_DOfUBIDcX0EoddFtXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
