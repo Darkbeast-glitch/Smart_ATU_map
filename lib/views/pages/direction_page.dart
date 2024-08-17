@@ -10,6 +10,7 @@ class DirectionsPage extends ConsumerStatefulWidget {
   const DirectionsPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _DirectionsPageState createState() => _DirectionsPageState();
 }
 
@@ -129,11 +130,11 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
                       subtitleColor: Colors.white,
                     ),
 
-                    Gap(10),
+                    const Gap(10),
                     // cards with the major locations on campus
 
                     // fancy container for the Labs
-                    FancyContainer(
+                    const FancyContainer(
                       title: "Labs",
                       subtitle: "Get all location and rooms in the Labs",
                       subtitleStyle: TextStyle(
@@ -151,9 +152,9 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
                       subtitleColor: Colors.white,
                     ),
 
-                    Gap(20),
+                    const Gap(20),
                     // fancy container for the Labs
-                    FancyContainer(
+                    const FancyContainer(
                       title: "Offices",
                       subtitle: "Get all location and rooms in the Offices",
                       subtitleStyle: TextStyle(

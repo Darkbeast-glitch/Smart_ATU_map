@@ -19,7 +19,7 @@ class MapPage extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: const Text(
-          'Quick Direction',
+          'Quick Map',
           style: AppConstants.titleTextStyle,
         ),
         centerTitle: true,
