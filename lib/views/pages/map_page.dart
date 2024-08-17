@@ -8,7 +8,9 @@ import 'package:smart_atu_nav/views/pages/home_page.dart';
 import 'package:smart_atu_nav/views/pages/profile_page.dart';
 
 class MapPage extends ConsumerWidget {
-  const MapPage({super.key});
+  final LatLng initialCoordinates;
+
+  const MapPage({super.key, required this.initialCoordinates});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,9 +30,8 @@ class MapPage extends ConsumerWidget {
         onMapCreated: (GoogleMapController controller) {
           ref.read(mapControllerProvider.notifier).state = controller;
         },
-        initialCameraPosition: const CameraPosition(
-          target:
-              LatLng(5.5538187, -0.2058498), // Corrected latitude and longitude
+        initialCameraPosition: CameraPosition(
+          target: initialCoordinates,
           zoom: 14.0,
         ),
       ),
@@ -39,9 +40,9 @@ class MapPage extends ConsumerWidget {
           if (mapController != null) {
             mapController.animateCamera(
               CameraUpdate.newCameraPosition(
-                const CameraPosition(
-                  target: LatLng(5.5538187, -0.2058498), // Example position
-                  zoom: 14.0,
+                CameraPosition(
+                  target: initialCoordinates,
+                  zoom: 20.0,
                 ),
               ),
             );

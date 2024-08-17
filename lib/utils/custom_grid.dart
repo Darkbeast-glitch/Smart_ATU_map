@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class CustomGrid extends StatelessWidget {
   final List<String> items;
   final List<String> images;
+  final List<LatLng> coordinates;
   final String shortDescription;
   final String title;
-  final void Function()? onTap;
+  final void Function(LatLng coordinate)? onTap;
 
-
-  const CustomGrid(
-      {super.key,
-      required this.items,
-      required this.images,
-      required this.title,
-      required this.shortDescription, this.onTap});
+  const CustomGrid({
+    super.key,
+    required this.items,
+    required this.images,
+    required this.coordinates,
+    required this.title,
+    required this.shortDescription,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,11 @@ class CustomGrid extends StatelessWidget {
                 itemCount: items.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap: onTap,
+                    onTap: () {
+                      if (onTap != null) {
+                        onTap!(coordinates[index]);
+                      }
+                    },
                     child: Card(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

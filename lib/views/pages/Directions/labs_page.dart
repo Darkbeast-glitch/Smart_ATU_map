@@ -3,27 +3,21 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_atu_nav/utils/custom_grid.dart';
 import 'package:smart_atu_nav/views/pages/map_page.dart';
 
-class SrcComplexPage extends StatelessWidget {
-  const SrcComplexPage({super.key});
+class LabsPage extends StatelessWidget {
+  const LabsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final List<String> buildings = [
-      'President\'s office',
-      'Vice Pres. Office',
-      'Gen. Secretary Office',
-      'PRO\'s Office',
-      'GNUT\'s Office',
-      'SRC Office',
+      'Computer Science Lab',
+      'Engineering Lab.',
+      'BTech Lab',
     ];
 
     final List<String> images = [
       'assets/images/mayor.png',
       'assets/images/vice.png',
       'assets/images/operator.png',
-      'assets/images/office.png',
-      'assets/images/gnuts.png',
-      'assets/images/transfer.png',
     ];
 
     // the cordinates
@@ -38,7 +32,7 @@ class SrcComplexPage extends StatelessWidget {
       body: CustomGrid(
         items: buildings,
         coordinates: coordinates,
-        onTap: (LatLng coordinates) {
+        onTap: (coordinates) {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => MapPage(
@@ -48,9 +42,8 @@ class SrcComplexPage extends StatelessWidget {
           );
         },
         images: images,
-        title: 'SRC Complex',
-        shortDescription:
-            'Get all the information you need about the SRC Complex',
+        title: 'Labs',
+        shortDescription: 'Get all the information you need about the Labs',
       ),
     );
   }

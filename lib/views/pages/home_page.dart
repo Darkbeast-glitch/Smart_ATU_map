@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_atu_nav/utils/cards.dart';
 import 'package:smart_atu_nav/utils/constants.dart';
 import 'package:smart_atu_nav/views/pages/direction_page.dart';
@@ -17,6 +18,10 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = ref.watch(currentPageIndexProvider);
+
+    // Define initial coordinates for the MapPage
+    final LatLng initialCoordinates =
+         LatLng(5.5542073460925465, -0.20596014491761958); // Example coordinates
 
     return Scaffold(
       body: SafeArea(
@@ -37,7 +42,9 @@ class HomePage extends ConsumerWidget {
           if (index == 1) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const MapPage()),
+              MaterialPageRoute(
+                  builder: (context) =>
+                      MapPage(initialCoordinates: initialCoordinates)),
             );
           } else if (index == 2) {
             // Navigate to the profile page

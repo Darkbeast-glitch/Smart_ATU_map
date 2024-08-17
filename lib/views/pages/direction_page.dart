@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:smart_atu_nav/utils/constants.dart';
+import 'package:smart_atu_nav/views/pages/Directions/departments_page.dart';
+import 'package:smart_atu_nav/views/pages/Directions/labs_page.dart';
 import 'package:smart_atu_nav/views/pages/Directions/src_complex_page.dart';
 // import 'package:smart_atu_nav/views/pages/home_page.dart';
 
@@ -112,20 +114,28 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
                     // cards with the major locations on campus
 
                     // fancy container for the Department
-                    const FancyContainer(
+                    FancyContainer(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DeparmentPage(),
+                          ),
+                        );
+                      },
                       title: "Departments",
                       subtitle: "Get all location and rooms in the Department",
-                      subtitleStyle: TextStyle(
+                      subtitleStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 13.0,
                           fontFamily: "Product Sans Regular"),
-                      titleStyle: TextStyle(
+                      titleStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                           fontFamily: "Product Sans Regular"),
-                      color1: Color(0xFF2604DE),
-                      color2: Color(0xFFee2809),
+                      color1: const Color(0xFF2604DE),
+                      color2: const Color(0xFFee2809),
                       textColor: Colors.white,
                       subtitleColor: Colors.white,
                     ),
@@ -134,14 +144,22 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
                     // cards with the major locations on campus
 
                     // fancy container for the Labs
-                    const FancyContainer(
+                    FancyContainer(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LabsPage(),
+                          ),
+                        );
+                      },
                       title: "Labs",
                       subtitle: "Get all location and rooms in the Labs",
-                      subtitleStyle: TextStyle(
+                      subtitleStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 13.0,
                           fontFamily: "Product Sans Regular"),
-                      titleStyle: TextStyle(
+                      titleStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
