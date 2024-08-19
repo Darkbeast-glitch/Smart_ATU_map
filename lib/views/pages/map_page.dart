@@ -32,8 +32,19 @@ class MapPage extends ConsumerWidget {
         },
         initialCameraPosition: CameraPosition(
           target: initialCoordinates,
-          zoom: 14.0,
+          zoom: 13.0,
         ),
+        markers: {
+          Marker(
+            markerId: MarkerId('initialCoordinates'),
+            position: initialCoordinates,
+            infoWindow: const InfoWindow(
+              title: 'Accra Technical University',
+            ),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueGreen),
+          ),
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -42,7 +53,7 @@ class MapPage extends ConsumerWidget {
               CameraUpdate.newCameraPosition(
                 CameraPosition(
                   target: initialCoordinates,
-                  zoom: 20.0,
+                  zoom: 16.0,
                 ),
               ),
             );
