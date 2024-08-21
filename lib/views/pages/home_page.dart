@@ -20,7 +20,7 @@ class HomePage extends ConsumerWidget {
     final currentIndex = ref.watch(currentPageIndexProvider);
 
     // Define initial coordinates for the MapPage
-    final LatLng initialCoordinates =
+    const LatLng initialCoordinates =
          LatLng(5.5542073460925465, -0.20596014491761958); // Example coordinates
 
     return Scaffold(
@@ -44,7 +44,7 @@ class HomePage extends ConsumerWidget {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      MapPage(initialCoordinates: initialCoordinates)),
+                      const MapPage(initialCoordinates: initialCoordinates)),
             );
           } else if (index == 2) {
             // Navigate to the profile page
