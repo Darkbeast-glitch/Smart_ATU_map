@@ -13,7 +13,7 @@ class MapPage extends ConsumerStatefulWidget {
   final LatLng initialCoordinates;
   final LatLng? destinationCoordinates;
 
-  MapPage({
+  const MapPage({
     super.key,
     required this.initialCoordinates,
     this.destinationCoordinates,
@@ -78,7 +78,7 @@ class _MapPageState extends ConsumerState<MapPage> {
 
         polylines.add(
           Polyline(
-            polylineId: PolylineId("route"),
+            polylineId: const PolylineId("route"),
             points: polylineCoordinates,
             color: Colors.blue,
             width: 6,
@@ -119,7 +119,7 @@ class _MapPageState extends ConsumerState<MapPage> {
       floatingActionButton: Align(
         alignment: Alignment.bottomLeft,
         child: Padding(
-          padding: const EdgeInsets. 0ball(20),
+          padding: const EdgeInsets.all(20),
           child: FloatingActionButton(
             onPressed: () async {
               Position position = await currentPosition();

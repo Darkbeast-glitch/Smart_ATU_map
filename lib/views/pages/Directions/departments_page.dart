@@ -14,15 +14,25 @@ class DeparmentPage extends StatelessWidget {
       'HICM Dep.',
       'Marketing Dep.',
       'Accounting Dep.',
-      'SRC Office',
+      'Fashion Dep.',
+      'Electrical Dep.',
+      'Civil Eng Dep.',
+      'Interior Design Dep.',
+      'Building Dep.',
+      'Procuments Dep.'
     ];
 
     final List<String> images = [
-      'assets/images/mayor.png',
-      'assets/images/vice.png',
-      'assets/images/operator.png',
-      'assets/images/office.png',
+      'assets/images/com_dep.png',
+      'assets/images/eng_dep.png',
+      'assets/images/hcim.png',
+      'assets/images/mar_dep.png',
       'assets/images/gnuts.png',
+      'assets/images/fash.png',
+      'assets/images/elec.png',
+      'assets/images/transfer.png',
+      'assets/images/transfer.png',
+      'assets/images/transfer.png',
       'assets/images/transfer.png',
     ];
 

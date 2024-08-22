@@ -7,7 +7,7 @@ import 'package:smart_atu_nav/utils/constants.dart';
 import 'package:smart_atu_nav/views/pages/direction_page.dart';
 import 'package:smart_atu_nav/views/pages/feedback_page.dart';
 import 'package:smart_atu_nav/views/pages/map_page.dart';
-import 'package:smart_atu_nav/views/pages/notification_page.dart';
+import 'package:smart_atu_nav/views/pages/notification_event_page.dart';
 import 'package:smart_atu_nav/views/pages/profile_page.dart';
 import 'package:smart_atu_nav/views/pages/search_page.dart';
 import 'package:smart_atu_nav/views/pages/study_space.dart';
@@ -44,7 +44,7 @@ class HomePage extends ConsumerWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MapPage(initialCoordinates: initialCoordinates)),
+                  builder: (context) => const MapPage(initialCoordinates: initialCoordinates)),
             );
           } else if (index == 2) {
             // Navigate to the profile page
@@ -169,7 +169,7 @@ class HomePage extends ConsumerWidget {
                   case 2:
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => const NotificationPage()),
+                          builder: (context) =>  NotificationAndEventPage()),
                     );
                     break;
                   case 3:
