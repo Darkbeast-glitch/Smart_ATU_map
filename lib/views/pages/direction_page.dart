@@ -37,7 +37,7 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ProfilePage(),
+                  builder: (context) =>  ProfilePage(),
                 ),
               );
 

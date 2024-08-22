@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 
 class MyTextField extends StatelessWidget {
   const MyTextField(
-      {Key? key,
+      {super.key,
       required this.hintText,
       required this.icon,
       required this.obscureText,
       required this.controller
       
-      })
-      : super(key: key);
+      });
   final String hintText;
   final IconData icon;
   final bool obscureText;

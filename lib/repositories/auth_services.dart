@@ -16,6 +16,8 @@ class AuthService {
     required this.googleSignIn,
   });
 
+  get currentUser => auth.currentUser;
+
 // sign in with google function
   void signInWithGoogle() async {
     final user = await googleSignIn.signIn();
@@ -63,6 +65,57 @@ class AuthService {
 
   // void signInWithEmail( email, password ) async {
   //   final user = await auth.s
+
+  // method to sign up users
+Future<void> signUpWithEmailAndPassword(
+    String email, String password, BuildContext context) async {
+  try {
+    // Show loading indicator
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
+
+    // Sign up the user
+    await auth.createUserWithEmailAndPassword(email: email, password: password);
+
+    // Dismiss the loading indicator
+    Navigator.pop(context);
+
+    // Navigate to the GetStarted page
+    Navigator.pushReplacementNamed(context, '/getStarted');
+
+    // Show success message
+    // 
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+                backgroundColor: Colors.green,
+
+        content: Text('Account created successfully!'),
+      ),
+    );
+  } on FirebaseAuthException catch (e) {
+    // Dismiss the loading indicator
+    Navigator.pop(context);
+
+    // Handle errors and show error message
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+                backgroundColor: Colors.red,
+
+        content: Text(e.message!),
+      ),
+    );
+
+    if (e.code == 'weak-password') {
+      print('The password provided is too weak.');
+    } else if (e.code == 'email-already-in-use') {
+      print('The account already exists for that email.');
+    }
+  }
+}
+
 
   // }
 }

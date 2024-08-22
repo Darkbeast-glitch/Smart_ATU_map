@@ -7,7 +7,8 @@ import 'package:smart_atu_nav/utils/my_buttons.dart';
 import 'package:smart_atu_nav/utils/my_textfield.dart';
 
 class LoginPage extends ConsumerWidget {
-  LoginPage({super.key});
+  final Function()? onTap;
+  LoginPage({super.key, required this.onTap});
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:2242531192.
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -52,7 +53,7 @@ class LoginPage extends ConsumerWidget {
                   color: Colors.black,
                 ),
               ),
-              const Gap(30),
+              const Gap(5),
               MyTextField(
                 controller: emailController,
                 hintText: 'Email',
@@ -130,7 +131,31 @@ class LoginPage extends ConsumerWidget {
                       emailController.text, passwordController.text, context);
                 },
               ),
-              const Gap(30),
+              const Gap(5),
+              // Don't have an account
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Don't have an account?",
+                    style: TextStyle(
+                        fontFamily: "Product Sans Regular", fontSize: 14),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  GestureDetector(
+                    onTap: onTap,
+                    child: const Text(
+                      "Create an Account",
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontFamily: "Product Sans Regular",
+                          fontSize: 14),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
