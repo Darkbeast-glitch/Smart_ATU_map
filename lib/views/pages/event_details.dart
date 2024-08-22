@@ -23,9 +23,36 @@ class EventDetailPage extends StatelessWidget {
               Text(event.name,
                   style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 8),
-              Text('Date: ${event.date}'),
-              Text('Time: ${event.time}'),
-              Text('Venue: ${event.venue}'),
+              Row(
+                children: [
+                  const Text(
+                    'Date:',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(width: 5),
+                  Text(event.date),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text(
+                    'Time:',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(width: 5),
+                  Text(event.time),
+                ],
+              ),
+              Row(
+                children: [
+                  const Text(
+                    'Venue:',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(width: 5),
+                  Text(event.venue),
+                ],
+              ),
               const SizedBox(height: 8),
               Text(event.description),
               const SizedBox(height: 16),
@@ -34,7 +61,7 @@ class EventDetailPage extends StatelessWidget {
                   onPressed: () {
                     // Handle registration logic here
                   },
-                  child: const Text('Register'),
+                  child: Text('Attend ${event.name}'),
                 ),
             ],
           ),

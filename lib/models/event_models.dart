@@ -7,6 +7,7 @@ class Event {
   final String id;
   final String name;
   final String imageUrl;
+  final String shortDesc;
   final String description;
   final String time;
   final String venue;
@@ -17,6 +18,7 @@ class Event {
     required this.id,
     required this.name,
     required this.imageUrl,
+    required this.shortDesc,
     required this.description,
     required this.time,
     required this.venue,

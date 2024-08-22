@@ -76,14 +76,20 @@ class EventCard extends StatelessWidget {
                   Text(
                     event.name,
                     style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20),
+                        // the event description goes here
+
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
                   ),
 
                   // the event description goes here
-                  
+
                   Text(
-                    event.description,
-                    style: const TextStyle(fontSize: 16),
+                    event.shortDesc.length > 35
+                        ? '${event.shortDesc.substring(0, 10)}...' // Truncate to 50 characters and add ellipsis
+                        : event
+                            .shortDesc, // Show the full text if it's within the limit
+                    style: const TextStyle(fontSize: 14),
                   ),
 
                   // the button goese here now
