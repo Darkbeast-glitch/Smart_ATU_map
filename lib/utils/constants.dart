@@ -6,11 +6,15 @@ class AppConstants {
   static const Color secondaryColor = Color.fromARGB(255, 27, 63, 161);
   static const Color backgroundColor = Colors.black;
   static const Color textColor = Colors.black;
+  
 
   // Fonts
   static const String primaryFontFamily = 'Product Sans Bold';
   static const String secondaryFontFamily = 'Product Sans Regular';
   // static const String secondaryFontFamily = 'Arial';
+
+  // API KEY
+  static const String google_api_key = 'AIzaSyBzhDOaciMvFZ6jjWmdQSQ1Nufz5R3v7l0';
 
   // Text Styles
   static const TextStyle titleTextStyle = TextStyle(
