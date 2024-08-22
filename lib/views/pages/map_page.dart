@@ -95,7 +95,7 @@ class MapPage extends ConsumerWidget {
             // Navigate to the profile page
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const ProfilePage()),
+              MaterialPageRoute(builder: (context) =>  ProfilePage()),
             );
           }
         },

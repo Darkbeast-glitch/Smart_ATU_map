@@ -6,6 +6,7 @@ import 'package:smart_atu_nav/utils/constants.dart';
 import 'package:smart_atu_nav/views/pages/Directions/departments_page.dart';
 import 'package:smart_atu_nav/views/pages/Directions/labs_page.dart';
 import 'package:smart_atu_nav/views/pages/Directions/src_complex_page.dart';
+import 'package:smart_atu_nav/views/pages/profile_page.dart';
 // import 'package:smart_atu_nav/views/pages/home_page.dart';
 
 class DirectionsPage extends ConsumerStatefulWidget {
@@ -29,10 +30,18 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
           style: AppConstants.titleTextStyle,
         ),
         centerTitle: true,
-        actions: const [
+        actions:  [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Icon(Icons.person),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: IconButton(onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>  ProfilePage(),
+                ),
+              );
+
+            }, icon: const Icon(Icons.person))
           )
         ],
       ),
