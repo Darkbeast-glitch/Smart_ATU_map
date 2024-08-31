@@ -39,6 +39,7 @@ class AuthService {
         builder: (context) => const Center(child: CircularProgressIndicator()),
       );
       await auth.signInWithEmailAndPassword(email: email, password: password);
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
@@ -67,55 +68,53 @@ class AuthService {
   //   final user = await auth.s
 
   // method to sign up users
-Future<void> signUpWithEmailAndPassword(
-    String email, String password, BuildContext context) async {
-  try {
-    // Show loading indicator
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const Center(child: CircularProgressIndicator()),
-    );
+  Future<void> signUpWithEmailAndPassword(
+      String email, String password, BuildContext context) async {
+    try {
+      // Show loading indicator
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(child: CircularProgressIndicator()),
+      );
 
-    // Sign up the user
-    await auth.createUserWithEmailAndPassword(email: email, password: password);
+      // Sign up the user
+      await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
 
-    // Dismiss the loading indicator
-    Navigator.pop(context);
+      // Dismiss the loading indicator
+      Navigator.pop(context);
 
-    // Navigate to the GetStarted page
-    Navigator.pushReplacementNamed(context, '/getStarted');
+      // Navigate to the GetStarted page
+      Navigator.pushReplacementNamed(context, '/getStarted');
 
-    // Show success message
-    // 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-                backgroundColor: Colors.green,
+      // Show success message
+      //
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.green,
+          content: Text('Account created successfully!'),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      // Dismiss the loading indicator
+      Navigator.pop(context);
 
-        content: Text('Account created successfully!'),
-      ),
-    );
-  } on FirebaseAuthException catch (e) {
-    // Dismiss the loading indicator
-    Navigator.pop(context);
+      // Handle errors and show error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(e.message!),
+        ),
+      );
 
-    // Handle errors and show error message
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-                backgroundColor: Colors.red,
-
-        content: Text(e.message!),
-      ),
-    );
-
-    if (e.code == 'weak-password') {
-      print('The password provided is too weak.');
-    } else if (e.code == 'email-already-in-use') {
-      print('The account already exists for that email.');
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
     }
   }
-}
-
 
   // }
 }

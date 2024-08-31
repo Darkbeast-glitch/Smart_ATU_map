@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -8,34 +9,99 @@ import 'package:smart_atu_nav/utils/constants.dart';
 import 'package:smart_atu_nav/views/pages/home_page.dart';
 import 'package:smart_atu_nav/views/pages/profile_page.dart';
 
-class MapPage extends ConsumerWidget {
+class MapPage extends ConsumerStatefulWidget {
   final LatLng initialCoordinates;
+  final LatLng? destinationCoordinates;
 
-  const MapPage({super.key, required this.initialCoordinates});
+  const MapPage({
+    super.key,
+    required this.initialCoordinates,
+    this.destinationCoordinates,
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final mapController = ref.watch(mapControllerProvider);
-    final currentIndex = ref.watch(currentPageIndexProvider);
+  _MapPageState createState() => _MapPageState();
+}
 
-    // Initial markers including the initialCoordinates marker
-    Set<Marker> markers = {
+class _MapPageState extends ConsumerState<MapPage> {
+  List<LatLng> polylineCoordinates = [];
+  Set<Polyline> polylines = {};
+  Set<Marker> markers = {};
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.destinationCoordinates != null) {
+      getPolyPoints();
+    }
+    markers.add(
       Marker(
-        markerId: const MarkerId('initialCoordinates'),
-        position: initialCoordinates,
+        markerId: const MarkerId('Source'),
+        position: widget.initialCoordinates,
         infoWindow: const InfoWindow(
-          title: 'Accra Technical University',
+          title: 'Starting Location',
         ),
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
       ),
-    };
+    );
+    if (widget.destinationCoordinates != null) {
+      markers.add(
+        Marker(
+          markerId: const MarkerId('Destination'),
+          position: widget.destinationCoordinates!,
+          infoWindow: const InfoWindow(
+            title: 'Destination',
+          ),
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+        ),
+      );
+    }
+  }
+
+  void getPolyPoints() async {
+    PolylinePoints polylinePoints = PolylinePoints();
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      googleApiKey: AppConstants.google_api_key,
+      request: PolylineRequest(
+        origin: PointLatLng(widget.initialCoordinates.latitude,
+            widget.initialCoordinates.longitude),
+        destination: PointLatLng(widget.destinationCoordinates!.latitude,
+            widget.destinationCoordinates!.longitude),
+        mode: TravelMode.driving,
+      ),
+    );
+    if (result.points.isNotEmpty) {
+      setState(() {
+        polylineCoordinates = result.points
+            .map((point) => LatLng(point.latitude, point.longitude))
+            .toList();
+
+        polylines.add(
+          Polyline(
+            polylineId: const PolylineId("route"),
+            points: polylineCoordinates,
+            color: Colors.blue,
+            width: 6,
+          ),
+        );
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final mapController = ref.watch(mapControllerProvider);
+    final currentIndex = ref.watch(currentPageIndexProvider);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: const Text(
+        title: Text(
           'Quick Map',
-          style: AppConstants.titleTextStyle,
+          style: AppConstants.titleTextStyle.copyWith(
+            fontSize: 25.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         centerTitle: true,
       ),
@@ -44,43 +110,53 @@ class MapPage extends ConsumerWidget {
           ref.read(mapControllerProvider.notifier).state = controller;
         },
         initialCameraPosition: CameraPosition(
-          target: initialCoordinates,
+          target: widget.initialCoordinates,
           zoom: 13.0,
         ),
         markers: markers,
+        polylines: polylines,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Position position = await currentPosition();
-          LatLng newPosition = LatLng(position.latitude, position.longitude);
+      floatingActionButton: Align(
+        alignment: Alignment.bottomLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: FloatingActionButton(
+            onPressed: () async {
+              Position position = await currentPosition();
+              LatLng newPosition =
+                  LatLng(position.latitude, position.longitude);
 
-          // Animate the camera to the new position
-          mapController?.animateCamera(
-            CameraUpdate.newCameraPosition(
-              CameraPosition(
-                target: newPosition,
-                zoom: 16.0,
-              ),
-            ),
-          );
+              // Animate the camera to the new position
+              mapController?.animateCamera(
+                CameraUpdate.newCameraPosition(
+                  CameraPosition(
+                    target: newPosition,
+                    zoom: 16.0,
+                  ),
+                ),
+              );
 
-          // Add the new marker for current location
-          markers.add(
-            Marker(
-              markerId: const MarkerId("Current Location"),
-              position: newPosition,
-              infoWindow: const InfoWindow(
-                title: 'Current Location',
-              ),
-              icon: BitmapDescriptor.defaultMarkerWithHue(
-                  BitmapDescriptor.hueGreen),
-            ),
-          );
+              // Add the new marker for current location
+              setState(() {
+                markers.add(
+                  Marker(
+                    markerId: const MarkerId("Current Location"),
+                    position: newPosition,
+                    infoWindow: const InfoWindow(
+                      title: 'Current Location',
+                    ),
+                    icon: BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueGreen),
+                  ),
+                );
+              });
 
-          // Update the map with the new marker
-          ref.read(mapControllerProvider.notifier).state = mapController;
-        },
-        child: const Icon(Icons.my_location),
+              // Update the map with the new marker
+              ref.read(mapControllerProvider.notifier).state = mapController;
+            },
+            child: const Icon(Icons.my_location),
+          ),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
@@ -92,10 +168,9 @@ class MapPage extends ConsumerWidget {
               MaterialPageRoute(builder: (context) => const HomePage()),
             );
           } else if (index == 2) {
-            // Navigate to the profile page
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) =>  ProfilePage()),
+              MaterialPageRoute(builder: (context) => ProfilePage()),
             );
           }
         },
@@ -121,13 +196,11 @@ class MapPage extends ConsumerWidget {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // Check if location services are enabled
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       return Future.error("Location services are disabled");
     }
 
-    // Check and request location permissions
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -140,7 +213,6 @@ class MapPage extends ConsumerWidget {
       return Future.error("Location permissions are permanently denied");
     }
 
-    // Get the current position
     Position position = await Geolocator.getCurrentPosition();
     return position;
   }

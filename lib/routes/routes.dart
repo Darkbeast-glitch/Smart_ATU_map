@@ -5,8 +5,8 @@ import 'package:smart_atu_nav/views/pages/get_started_page.dart';
 class Routes {
   static Map<String, WidgetBuilder> getRoutes() {
     return {
-      '/': (context) => AuthPage(),
-      '/getStarted': (context) => GetStartedPage(),
+      '/': (context) => const AuthPage(),
+      '/getStarted': (context) => const GetStartedPage(),
       // Add other routes here
     };
   }

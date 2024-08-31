@@ -5,8 +5,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_atu_nav/utils/cards.dart';
 import 'package:smart_atu_nav/utils/constants.dart';
 import 'package:smart_atu_nav/views/pages/direction_page.dart';
+import 'package:smart_atu_nav/views/pages/feedback_page.dart';
+import 'package:smart_atu_nav/views/pages/lecturer_page.dart';
 import 'package:smart_atu_nav/views/pages/map_page.dart';
-import 'package:smart_atu_nav/views/pages/notification_page.dart';
+import 'package:smart_atu_nav/views/pages/notification_event_page.dart';
 import 'package:smart_atu_nav/views/pages/profile_page.dart';
 import 'package:smart_atu_nav/views/pages/search_page.dart';
 import 'package:smart_atu_nav/views/pages/study_space.dart';
@@ -21,7 +23,7 @@ class HomePage extends ConsumerWidget {
 
     // Define initial coordinates for the MapPage
     const LatLng initialCoordinates =
-         LatLng(5.5542073460925465, -0.20596014491761958); // Example coordinates
+        LatLng(5.5542073460925465, -0.20596014491761958); // Example coordinates
 
     return Scaffold(
       body: SafeArea(
@@ -31,9 +33,22 @@ class HomePage extends ConsumerWidget {
             const Gap(10),
             _buildInstructions(),
             const Gap(10),
-            _buildGrid(),
+            _buildGrid(context),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your action here
+          // For example, navigate to a Teacher Information Page
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) =>
+                    const LectureInfoPage()), // Replace with your page
+          );
+        }, // Use the teacher icon here
+        tooltip: 'Lecturer Tracker ',
+        child: const Icon(Icons.person),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
@@ -50,7 +65,7 @@ class HomePage extends ConsumerWidget {
             // Navigate to the profile page
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) =>  ProfilePage()),
+              MaterialPageRoute(builder: (context) => ProfilePage()),
             );
           }
         },
@@ -101,7 +116,7 @@ class HomePage extends ConsumerWidget {
     );
   }
 
-  Widget _buildGrid() {
+  Widget _buildGrid(BuildContext context) {
     final List<Map<String, String>> gridItems = [
       {
         'imageName': 'assets/images/direct.png',
@@ -169,7 +184,8 @@ class HomePage extends ConsumerWidget {
                   case 2:
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => const NotificationPage()),
+                          builder: (context) =>
+                              const NotificationAndEventPage()),
                     );
                     break;
                   case 3:
@@ -181,13 +197,15 @@ class HomePage extends ConsumerWidget {
                   case 4:
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => const DirectionsPage()),
+                          builder: (context) =>
+                              const FeedbackPage()), // Assuming FeedbackPage exists
                     );
                     break;
                   case 5:
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => const DirectionsPage()),
+                          builder: (context) =>
+                              const FeedbackPage()), // Assuming InformationPage exists
                     );
                     break;
                   default:

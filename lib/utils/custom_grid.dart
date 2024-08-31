@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:smart_atu_nav/utils/constants.dart';
 
 class CustomGrid extends StatelessWidget {
   final List<String> items;
@@ -24,14 +25,18 @@ class CustomGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(
+          title,
+          style: AppConstants.titleTextStyle,
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             // Simple description
-            Text(shortDescription),
+            Text(textAlign: TextAlign.center, shortDescription),
             const Gap(10),
 
             // Wrap GridView in Flexible to ensure it has proper constraints
