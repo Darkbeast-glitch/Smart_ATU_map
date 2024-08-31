@@ -8,7 +8,7 @@ class EventRepository {
   Stream<List<Event>> getEvents() {
     return _firestore.collection('events').snapshots().map((snapshot) {
       return snapshot.docs.map((doc) {
-        return Event.fromJson(doc.data() as Map<String, dynamic>);
+        return Event.fromJson(doc.data());
       }).toList();
     });
   }

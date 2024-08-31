@@ -6,6 +6,7 @@ import 'package:smart_atu_nav/utils/constants.dart';
 import 'package:smart_atu_nav/views/pages/Directions/departments_page.dart';
 import 'package:smart_atu_nav/views/pages/Directions/labs_page.dart';
 import 'package:smart_atu_nav/views/pages/Directions/src_complex_page.dart';
+import 'package:smart_atu_nav/views/pages/office_page.dart';
 import 'package:smart_atu_nav/views/pages/profile_page.dart';
 // import 'package:smart_atu_nav/views/pages/home_page.dart';
 
@@ -30,19 +31,19 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
           style: AppConstants.titleTextStyle,
         ),
         centerTitle: true,
-        actions:  [
+        actions: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: IconButton(onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>  ProfilePage(),
-                ),
-              );
-
-            }, icon: const Icon(Icons.person))
-          )
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.person)))
         ],
       ),
       body: Padding(
@@ -181,20 +182,27 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
 
                     const Gap(20),
                     // fancy container for the Labs
-                    const FancyContainer(
+                    FancyContainer(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const OfficePage(),
+                          ),
+                        );
+                      },
                       title: "Offices",
                       subtitle: "Get all location and rooms in the Offices",
-                      subtitleStyle: TextStyle(
+                      subtitleStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 13.0,
                           fontFamily: "Product Sans Regular"),
-                      titleStyle: TextStyle(
+                      titleStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                           fontFamily: "Product Sans Regular"),
-                      color1: Color(0xFFCB1841),
-                      color2: Color(0xFF2604DE),
+                      color1: const Color(0xFFCB1841),
+                      color2: const Color(0xFF2604DE),
                       textColor: Colors.white,
                       subtitleColor: Colors.white,
                     ),

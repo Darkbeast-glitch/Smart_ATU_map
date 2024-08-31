@@ -6,6 +6,7 @@ import 'package:smart_atu_nav/utils/cards.dart';
 import 'package:smart_atu_nav/utils/constants.dart';
 import 'package:smart_atu_nav/views/pages/direction_page.dart';
 import 'package:smart_atu_nav/views/pages/feedback_page.dart';
+import 'package:smart_atu_nav/views/pages/lecturer_page.dart';
 import 'package:smart_atu_nav/views/pages/map_page.dart';
 import 'package:smart_atu_nav/views/pages/notification_event_page.dart';
 import 'package:smart_atu_nav/views/pages/profile_page.dart';
@@ -36,6 +37,19 @@ class HomePage extends ConsumerWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your action here
+          // For example, navigate to a Teacher Information Page
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) =>
+                    const LectureInfoPage()), // Replace with your page
+          );
+        }, // Use the teacher icon here
+        tooltip: 'Lecturer Tracker ',
+        child: const Icon(Icons.person),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (index) {
@@ -44,7 +58,8 @@ class HomePage extends ConsumerWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const MapPage(initialCoordinates: initialCoordinates)),
+                  builder: (context) =>
+                      const MapPage(initialCoordinates: initialCoordinates)),
             );
           } else if (index == 2) {
             // Navigate to the profile page
@@ -169,7 +184,8 @@ class HomePage extends ConsumerWidget {
                   case 2:
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) =>  NotificationAndEventPage()),
+                          builder: (context) =>
+                              const NotificationAndEventPage()),
                     );
                     break;
                   case 3:
@@ -181,13 +197,15 @@ class HomePage extends ConsumerWidget {
                   case 4:
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => const FeedbackPage()), // Assuming FeedbackPage exists
+                          builder: (context) =>
+                              const FeedbackPage()), // Assuming FeedbackPage exists
                     );
                     break;
                   case 5:
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => const FeedbackPage()), // Assuming InformationPage exists
+                          builder: (context) =>
+                              const FeedbackPage()), // Assuming InformationPage exists
                     );
                     break;
                   default:

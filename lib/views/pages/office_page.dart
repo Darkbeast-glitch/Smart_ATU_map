@@ -5,39 +5,47 @@ import 'package:smart_atu_nav/providers/get_current_position_provider.dart';
 import 'package:smart_atu_nav/utils/custom_grid.dart';
 import 'package:smart_atu_nav/views/pages/map_page.dart';
 
-class SrcComplexPage extends ConsumerWidget {
-  const SrcComplexPage({super.key});
+class OfficePage extends ConsumerWidget {
+  const OfficePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final positionAsyncValue = ref.watch(getCurrentPositioniProvider);
 
     final List<String> buildings = [
-      'President\'s office',
-      'Vice Pres. Office',
-      'WoCom Office',
-      'Finacial Office',
-      // 'PRO\'s Office',
-      // 'GNUT\'s Office',
-      // 'SRC Office',
+      'Computer Science Dep.',
+      'Engineering Dep.',
+      'HICM Dep.',
+      'Marketing Dep.',
+      'Accounting Dep.',
+      'Fashion Dep.',
+      'Electrical Dep.',
+      'Civil Eng Dep.',
+      'Interior Design Dep.',
+      'Building Dep.',
+      'Procuments Dep.'
     ];
 
     final List<String> images = [
-      'assets/images/mayor.png',
-      'assets/images/vice.png',
-      'assets/images/operator.png',
-      'assets/images/office.png',
-      // 'assets/images/gnuts.png',
-      // 'assets/images/transfer.png',
+      'assets/images/com_dep.png',
+      'assets/images/eng_dep.png',
+      'assets/images/hcim.png',
+      'assets/images/mar_dep.png',
+      'assets/images/gnuts.png',
+      'assets/images/fash.png',
+      'assets/images/elec.png',
+      'assets/images/transfer.png',
+      'assets/images/interior-design.png',
+      'assets/images/skyscraper.png',
+      'assets/images/procurement.png',
     ];
 
-    // Coordinates for destinations
+    // the cordinates
     final List<LatLng> coordinates = [
       const LatLng(37.7749, -122.4194),
       const LatLng(34.0522, -118.2437),
       const LatLng(40.7128, -74.0060),
       const LatLng(51.5074, -0.1278),
-      // Add other coordinates as needed
     ];
 
     return Scaffold(
@@ -61,9 +69,9 @@ class SrcComplexPage extends ConsumerWidget {
               );
             },
             images: images,
-            title: 'SRC Complex',
+            title: 'Offices',
             shortDescription:
-                'Get all the information you need about the SRC Complex',
+                'Get all the information you need about all the Offices on Campus',
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),

@@ -55,11 +55,8 @@ class EventCard extends StatelessWidget {
             children: [
               // the event image starts onthe container
               Container(
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:111396713.
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:1829704122.
                 width: 100,
                 height: 100,
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:380001934.
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(

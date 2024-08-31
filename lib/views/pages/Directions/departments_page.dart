@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:smart_atu_nav/providers/get_current_position_provider.dart';
 import 'package:smart_atu_nav/utils/custom_grid.dart';
 import 'package:smart_atu_nav/views/pages/map_page.dart';
 
-class DeparmentPage extends StatelessWidget {
+class DeparmentPage extends ConsumerWidget {
   const DeparmentPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final positionAsyncValue = ref.watch(getCurrentPositioniProvider);
+
     final List<String> buildings = [
       'Computer Science Dep.',
       'Engineering Dep.',
@@ -31,9 +35,9 @@ class DeparmentPage extends StatelessWidget {
       'assets/images/fash.png',
       'assets/images/elec.png',
       'assets/images/transfer.png',
-      'assets/images/transfer.png',
-      'assets/images/transfer.png',
-      'assets/images/transfer.png',
+      'assets/images/interior-design.png',
+      'assets/images/skyscraper.png',
+      'assets/images/procurement.png',
     ];
 
     // the cordinates
@@ -45,22 +49,33 @@ class DeparmentPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      body: CustomGrid(
-        items: buildings,
-        coordinates: coordinates,
-        onTap: (coordinates) {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => MapPage(
-                initialCoordinates: coordinates,
-              ),
-            ),
+      body: positionAsyncValue.when(
+        data: (position) {
+          return CustomGrid(
+            items: buildings,
+            coordinates: coordinates,
+            onTap: (LatLng destinationCoordinates) {
+              LatLng initialCoordinates =
+                  LatLng(position.latitude, position.longitude);
+
+              // Navigate to MapPage with initial and destination coordinates
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => MapPage(
+                    initialCoordinates: initialCoordinates,
+                    destinationCoordinates: destinationCoordinates,
+                  ),
+                ),
+              );
+            },
+            images: images,
+            title: 'Departments',
+            shortDescription:
+                'Get all the information you need about all the Departments on Campus',
           );
         },
-        images: images,
-        title: 'Departments',
-        shortDescription:
-            'Get all the information you need about the Departments',
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) => Center(child: Text('Error: $error')),
       ),
     );
   }
