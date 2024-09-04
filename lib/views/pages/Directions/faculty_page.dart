@@ -3,21 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:smart_atu_nav/utils/constants.dart';
-import 'package:smart_atu_nav/views/pages/Directions/faculty_page.dart';
-import 'package:smart_atu_nav/views/pages/Directions/src_complex_page.dart';
-import 'package:smart_atu_nav/views/pages/office_page.dart';
+import 'package:smart_atu_nav/views/pages/Faculties/applied_art_fc.dart';
+import 'package:smart_atu_nav/views/pages/Faculties/applied_science_fc.dart';
+import 'package:smart_atu_nav/views/pages/Faculties/built_env_fc.dart';
+import 'package:smart_atu_nav/views/pages/Faculties/business_Fc.dart';
+import 'package:smart_atu_nav/views/pages/Faculties/engineering.dart';
 import 'package:smart_atu_nav/views/pages/profile_page.dart';
 // import 'package:smart_atu_nav/views/pages/home_page.dart';
 
-class DirectionsPage extends ConsumerStatefulWidget {
-  const DirectionsPage({super.key});
+class FacultyPage extends ConsumerStatefulWidget {
+  const FacultyPage({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _DirectionsPageState createState() => _DirectionsPageState();
+  _FacultyPageState createState() => _FacultyPageState();
 }
 
-class _DirectionsPageState extends ConsumerState<DirectionsPage> {
+class _FacultyPageState extends ConsumerState<FacultyPage> {
   final TextEditingController _searchController = TextEditingController();
   int _currentIndex = 0; // Current index for BottomNavigationBar
 
@@ -26,7 +28,7 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Directions",
+          "Faculties",
           style: AppConstants.titleTextStyle,
         ),
         centerTitle: true,
@@ -57,7 +59,7 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
                 children: [
                   Text(
                     textAlign: TextAlign.center,
-                    "Looking for direction to the major places on campus\nChoose a point of interest",
+                    "Get all the faculties and their department here, \nfind your way easily.",
                     style: AppConstants.subtitleTextStyle,
                   ),
                 ],
@@ -67,7 +69,7 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
 
               SearchBar(
                 controller: _searchController,
-                hintText: "Search for a place",
+                hintText: "Search for a faculty",
                 leading: const Icon(Icons.search),
                 hintStyle: WidgetStateProperty.all(AppConstants.hintTextStyle),
                 padding: WidgetStateProperty.all(
@@ -83,7 +85,7 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("Locations on campus",
+                  Text("All Faculties ",
                       style: AppConstants.seconTitleTextStyle),
                 ],
               ),
@@ -99,12 +101,12 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const SrcComplexPage(),
+                            builder: (context) => const Engineering(),
                           ),
                         );
                       },
-                      title: "SRC Complex",
-                      subtitle: "Get all locations in the SRC Complex, ",
+                      title: "Faculty of Engineering",
+                      subtitle: "Get all deparments in this faculty ",
                       subtitleStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 13.0,
@@ -128,12 +130,13 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const FacultyPage(),
+                            builder: (context) => const AppliedScience(),
                           ),
                         );
                       },
-                      title: "Faculties",
-                      subtitle: "Get all the departments in each faculty",
+                      title: "Faculty of Applied Science",
+                      subtitle:
+                          "Get to see all the departments in this faculty",
                       subtitleStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 13.0,
@@ -158,11 +161,66 @@ class _DirectionsPageState extends ConsumerState<DirectionsPage> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => const OfficePage(),
+                            builder: (context) => const AppliedART(),
                           ),
                         );
                       },
-                      title: "Offices",
+                      title: "Faculty of Applied Art",
+                      subtitle: "Get all location and rooms in the Offices",
+                      subtitleStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 13.0,
+                          fontFamily: "Product Sans Regular"),
+                      titleStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Product Sans Regular"),
+                      color1: const Color(0xFFCB1841),
+                      color2: const Color(0xFF2604DE),
+                      textColor: Colors.white,
+                      subtitleColor: Colors.white,
+                    ),
+                    const Gap(10),
+
+                    // faculty of business
+                    FancyContainer(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const Business(),
+                          ),
+                        );
+                      },
+                      title: "Faculty of Business",
+                      subtitle: "Get all location and rooms in the Offices",
+                      subtitleStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 13.0,
+                          fontFamily: "Product Sans Regular"),
+                      titleStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Product Sans Regular"),
+                      color1: const Color(0xFFCB1841),
+                      color2: const Color(0xFF2604DE),
+                      textColor: Colors.white,
+                      subtitleColor: Colors.white,
+                    ),
+
+                    const Gap(10),
+
+                    // faculty of business
+                    FancyContainer(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const BuiltEnv(),
+                          ),
+                        );
+                      },
+                      title: "Faculty of Built Environment",
                       subtitle: "Get all location and rooms in the Offices",
                       subtitleStyle: const TextStyle(
                           color: Colors.white,

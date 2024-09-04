@@ -27,7 +27,9 @@ class CustomGrid extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           title,
-          style: AppConstants.titleTextStyle,
+          style: AppConstants.titleTextStyle.copyWith(
+            fontSize: 20,
+          ),
         ),
         centerTitle: true,
       ),
