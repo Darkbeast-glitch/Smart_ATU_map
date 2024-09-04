@@ -13,31 +13,17 @@ class OfficePage extends ConsumerWidget {
     final positionAsyncValue = ref.watch(getCurrentPositioniProvider);
 
     final List<String> buildings = [
-      'Computer Science Dep.',
-      'Engineering Dep.',
-      'HICM Dep.',
-      'Marketing Dep.',
-      'Accounting Dep.',
-      'Fashion Dep.',
-      'Electrical Dep.',
-      'Civil Eng Dep.',
-      'Interior Design Dep.',
-      'Building Dep.',
-      'Procuments Dep.'
+      'Administration.',
+      'Laison\'s Office',
+      'Library',
+      'Printing'
     ];
 
     final List<String> images = [
       'assets/images/com_dep.png',
       'assets/images/eng_dep.png',
       'assets/images/hcim.png',
-      'assets/images/mar_dep.png',
-      'assets/images/gnuts.png',
-      'assets/images/fash.png',
-      'assets/images/elec.png',
-      'assets/images/transfer.png',
-      'assets/images/interior-design.png',
-      'assets/images/skyscraper.png',
-      'assets/images/procurement.png',
+      'assets/images/hcim.png',
     ];
 
     // the cordinates

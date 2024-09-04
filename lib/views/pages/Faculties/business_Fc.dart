@@ -5,31 +5,25 @@ import 'package:smart_atu_nav/providers/get_current_position_provider.dart';
 import 'package:smart_atu_nav/utils/custom_grid.dart';
 import 'package:smart_atu_nav/views/pages/map_page.dart';
 
-class LabsPage extends ConsumerWidget {
-  const LabsPage({super.key});
+class Business extends ConsumerWidget {
+  const Business({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final positionAsyncValue = ref.watch(getCurrentPositioniProvider);
 
     final List<String> buildings = [
-      'Computer Science Lab',
-      'Engineering Lab.',
-      'BTech Lab',
-      'Flex Lab',
-      'Career Center ',
-      'Mechatronic Lab',
-      'Drone Lab',
+      'Accountancy and Finance',
+      'Management and Public Administration.',
+      'Procurement and Supply Chain Management.',
+      'Marketing',
     ];
 
     final List<String> images = [
-      'assets/images/computer-laboratory.png',
-      'assets/images/chemical.png',
-      'assets/images/lab.png',
-      'assets/images/flex.png',
-      'assets/images/career.png',
-      'assets/images/operator.png',
-      'assets/images/drone.png',
+      'assets/images/com_dep.png',
+      'assets/images/eng_dep.png',
+      'assets/images/hcim.png',
+      'assets/images/mar_dep.png',
     ];
 
     // the cordinates
@@ -39,6 +33,7 @@ class LabsPage extends ConsumerWidget {
       const LatLng(40.7128, -74.0060),
       const LatLng(51.5074, -0.1278),
     ];
+
     return Scaffold(
       body: positionAsyncValue.when(
         data: (position) {
@@ -60,9 +55,9 @@ class LabsPage extends ConsumerWidget {
               );
             },
             images: images,
-            title: 'Labs',
+            title: 'Business Departments',
             shortDescription:
-                'Get all the information you need about Labs on campus',
+                'Get all the information you need about all the Departments on Campus',
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),

@@ -5,25 +5,18 @@ import 'package:smart_atu_nav/providers/get_current_position_provider.dart';
 import 'package:smart_atu_nav/utils/custom_grid.dart';
 import 'package:smart_atu_nav/views/pages/map_page.dart';
 
-class DeparmentPage extends ConsumerWidget {
-  const DeparmentPage({super.key});
+class AppliedScience extends ConsumerWidget {
+  const AppliedScience({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final positionAsyncValue = ref.watch(getCurrentPositioniProvider);
 
     final List<String> buildings = [
-      'Computer Science Dep.',
-      'Civil Engineering Dep.',
-      'HICM Dep.',
-      'Marketing Dep.',
-      'Accounting Dep.',
-      'Fashion Dep.',
-      'Electrical Dep.',
-      'Civil Eng Dep.',
-      'Interior Design Dep.',
-      'Building Dep.',
-      'Procuments Dep.'
+      'Applied Mathematics and Statistics',
+      'Science Laboratory Technology.',
+      'Computer Science.',
+      'Medical Laboratory Technology',
     ];
 
     final List<String> images = [
@@ -31,13 +24,6 @@ class DeparmentPage extends ConsumerWidget {
       'assets/images/eng_dep.png',
       'assets/images/hcim.png',
       'assets/images/mar_dep.png',
-      'assets/images/gnuts.png',
-      'assets/images/fash.png',
-      'assets/images/elec.png',
-      'assets/images/transfer.png',
-      'assets/images/interior-design.png',
-      'assets/images/skyscraper.png',
-      'assets/images/procurement.png',
     ];
 
     // the cordinates
@@ -69,7 +55,7 @@ class DeparmentPage extends ConsumerWidget {
               );
             },
             images: images,
-            title: 'Departments',
+            title: 'Applied Sciences Departments',
             shortDescription:
                 'Get all the information you need about all the Departments on Campus',
           );
