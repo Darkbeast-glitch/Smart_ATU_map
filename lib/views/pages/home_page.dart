@@ -44,7 +44,7 @@ class HomePage extends ConsumerWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
                 builder: (context) =>
-                    const LectureInfoPage()), // Replace with your page
+                    const LecturerTrackerPage()), // Replace with your page
           );
         }, // Use the teacher icon here
         tooltip: 'Lecturer Tracker ',
@@ -198,14 +198,14 @@ class HomePage extends ConsumerWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                           builder: (context) =>
-                              const FeedbackPage()), // Assuming FeedbackPage exists
+                              FeedbackPage()), // Assuming FeedbackPage exists
                     );
                     break;
                   case 5:
                     Navigator.of(context).push(
                       MaterialPageRoute(
                           builder: (context) =>
-                              const FeedbackPage()), // Assuming InformationPage exists
+                              FeedbackPage()), // Assuming InformationPage exists
                     );
                     break;
                   default:
