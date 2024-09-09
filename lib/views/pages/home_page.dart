@@ -125,7 +125,7 @@ class HomePage extends ConsumerWidget {
       },
       {
         'imageName': 'assets/images/search.png',
-        'name': "Search",
+        'name': "Lecturer Track",
         'description': "Search for a location on campus"
       },
       {
@@ -145,7 +145,7 @@ class HomePage extends ConsumerWidget {
       },
       {
         'imageName': 'assets/images/information.png',
-        'name': "Information",
+        'name': "About",
         'description': "Get information on campus"
       },
     ];
