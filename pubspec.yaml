@@ -50,6 +50,7 @@ dependencies:
   google_maps_flutter: ^2.9.0
   google_sign_in: ^6.2.1
   json_annotation: ^4.9.0
+  wiredash: ^2.2.1
 
 flutter_icons:
   android: true
