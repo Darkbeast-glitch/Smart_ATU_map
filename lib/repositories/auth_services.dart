@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-final authSerivceProvider = Provider<AuthService>((ref) {
+final authServiceProvider = Provider<AuthService>((ref) {
   return AuthService(auth: FirebaseAuth.instance, googleSignIn: GoogleSignIn());
 });
 
@@ -16,20 +16,35 @@ class AuthService {
     required this.googleSignIn,
   });
 
-  get currentUser => auth.currentUser;
+  User? get currentUser => auth.currentUser;
 
-// sign in with google function
-  void signInWithGoogle() async {
-    final user = await googleSignIn.signIn();
-    final googleAuth = await user!.authentication;
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    await auth.signInWithCredential(credential);
+  // Sign in with Google function
+  Future<void> signInWithGoogle(BuildContext context) async {
+    try {
+      final user = await googleSignIn.signIn();
+      if (user == null) {
+        // User canceled the sign-in process
+        return;
+      }
+
+      final googleAuth = await user.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await auth.signInWithCredential(credential);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text('Failed to sign in with Google: $e'),
+        ),
+      );
+    }
   }
 
-//  sign in with email and password method
+  // Sign in with email and password method
   Future<void> signInWithEmailAndPassword(
       String email, String password, BuildContext context) async {
     try {
@@ -44,10 +59,9 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       // Handle errors
-      print(e.code);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(e.message!),
+          content: Text(e.message ?? 'An unexpected error occurred'),
         ),
       );
       if (e.code == 'user-not-found') {
@@ -58,16 +72,13 @@ class AuthService {
     }
   }
 
-  // method for signout
-
+  // Sign out method
   Future<void> signOut() async {
     await auth.signOut();
+    await googleSignIn.signOut();
   }
 
-  // void signInWithEmail( email, password ) async {
-  //   final user = await auth.s
-
-  // method to sign up users
+  // Sign up with email and password method
   Future<void> signUpWithEmailAndPassword(
       String email, String password, BuildContext context) async {
     try {
@@ -89,7 +100,6 @@ class AuthService {
       Navigator.pushReplacementNamed(context, '/getStarted');
 
       // Show success message
-      //
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.green,
@@ -104,7 +114,7 @@ class AuthService {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Colors.red,
-          content: Text(e.message!),
+          content: Text(e.message ?? 'An error occurred'),
         ),
       );
 
@@ -115,6 +125,4 @@ class AuthService {
       }
     }
   }
-
-  // }
 }

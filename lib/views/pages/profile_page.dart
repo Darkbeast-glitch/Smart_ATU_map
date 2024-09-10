@@ -15,7 +15,7 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userAuthProvider = ref.read(authSerivceProvider);
+    final userAuthProvider = ref.read(authServiceProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('Profile ')),
       body: Padding(
@@ -36,12 +36,12 @@ class ProfilePage extends ConsumerWidget {
             // display user name and email
 
             Text(
-              '${userAuthProvider.currentUser?.email ?? 'User Name'}',
+              userAuthProvider.currentUser?.email ?? 'User Name',
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Text(
-              '${userAuthProvider.currentUser?.email ?? 'Email Address'}',
+              userAuthProvider.currentUser?.email ?? 'Email Address',
               style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 30),

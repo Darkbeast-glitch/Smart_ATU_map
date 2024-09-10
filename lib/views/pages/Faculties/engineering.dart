@@ -23,7 +23,7 @@ class Engineering extends ConsumerWidget {
       'assets/images/com_dep.png',
       'assets/images/eng_dep.png',
       'assets/images/hcim.png',
-      'assets/images/mar_dep.png',
+      'assets/images/elec.png',
     ];
 
     // the cordinates

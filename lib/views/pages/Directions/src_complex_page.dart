@@ -17,23 +17,27 @@ class SrcComplexPage extends ConsumerWidget {
       'Vice Pres. Office',
       'WoCom Office',
       'Finacial Office',
-      // 'PRO\'s Office',
-      // 'GNUT\'s Office',
-      // 'SRC Office',
+      'PRO\'s Office',
+      'GNUT\'s Office',
+      'SRC Conference Room',
     ];
 
     final List<String> images = [
       'assets/images/mayor.png',
       'assets/images/vice.png',
       'assets/images/operator.png',
+      'assets/images/gnuts.png',
       'assets/images/office.png',
-      // 'assets/images/gnuts.png',
+      'assets/images/ambaass.png',
+      'assets/images/conference.png',
+      // 'assets/images/transfer.png',
       // 'assets/images/transfer.png',
     ];
 
     // Coordinates for destinations
     final List<LatLng> coordinates = [
-      const LatLng(37.7749, -122.4194),
+      const LatLng(34.0522, -118.2437),
+
       const LatLng(34.0522, -118.2437),
       const LatLng(40.7128, -74.0060),
       const LatLng(51.5074, -0.1278),

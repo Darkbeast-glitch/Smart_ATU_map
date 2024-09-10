@@ -4,15 +4,16 @@ import 'package:gap/gap.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:smart_atu_nav/utils/cards.dart';
 import 'package:smart_atu_nav/utils/constants.dart';
+import 'package:smart_atu_nav/views/pages/about_page.dart';
 import 'package:smart_atu_nav/views/pages/direction_page.dart';
 import 'package:smart_atu_nav/views/pages/feedback_page.dart';
 import 'package:smart_atu_nav/views/pages/lecturer_page.dart';
 import 'package:smart_atu_nav/views/pages/map_page.dart';
 import 'package:smart_atu_nav/views/pages/notification_event_page.dart';
 import 'package:smart_atu_nav/views/pages/profile_page.dart';
-import 'package:smart_atu_nav/views/pages/search_page.dart';
 import 'package:smart_atu_nav/views/pages/study_space.dart';
 import 'package:smart_atu_nav/providers/bottom_navigation_state.dart';
+import 'package:wiredash/wiredash.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -39,16 +40,11 @@ class HomePage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your action here
-          // For example, navigate to a Teacher Information Page
-          Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) =>
-                    const LecturerTrackerPage()), // Replace with your page
-          );
+          // Replace with your page
+          Wiredash.of(context).show(inheritMaterialTheme: true);
         }, // Use the teacher icon here
-        tooltip: 'Lecturer Tracker ',
-        child: const Icon(Icons.person),
+        tooltip: 'Report a Bug ',
+        child: const Icon(Icons.bug_report),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
@@ -178,7 +174,8 @@ class HomePage extends ConsumerWidget {
                   case 1:
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context) => const SearchPage()),
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:2538454941.
+                          builder: (context) => const LecturerTrackerPage()),
                     );
                     break;
                   case 2:
@@ -205,7 +202,7 @@ class HomePage extends ConsumerWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                           builder: (context) =>
-                              FeedbackPage()), // Assuming InformationPage exists
+                              const AboutPage()), // Assuming InformationPage exists
                     );
                     break;
                   default:

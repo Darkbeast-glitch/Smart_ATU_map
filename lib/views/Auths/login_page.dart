@@ -116,7 +116,7 @@ class LoginPage extends ConsumerWidget {
               // google logo
               GestureDetector(
                 onTap: () {
-                  ref.read(authSerivceProvider).signInWithGoogle();
+                  ref.read(authServiceProvider).signInWithGoogle(context);
                 },
                 child: Image.asset(
                   "assets/images/google.png",
@@ -127,7 +127,7 @@ class LoginPage extends ConsumerWidget {
               MyButton(
                 text: "Sign in ",
                 onTap: () {
-                  ref.read(authSerivceProvider).signInWithEmailAndPassword(
+                  ref.read(authServiceProvider).signInWithEmailAndPassword(
                       emailController.text, passwordController.text, context);
                 },
               ),

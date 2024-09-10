@@ -21,7 +21,7 @@ class RegisterPage extends ConsumerWidget {
     Future<void> signUserUp() async {
       try {
         if (passwordController.text == ConfirmPasswordController.text) {
-          await ref.read(authSerivceProvider).signUpWithEmailAndPassword(
+          await ref.read(authServiceProvider).signUpWithEmailAndPassword(
               emailController.text, passwordController.text, context);
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
